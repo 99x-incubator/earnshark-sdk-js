@@ -1,0 +1,14 @@
+{
+  "name": "earnshark-npm",
+  "version": "1.0.28",
+  "description": "This is the earnshark npm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "earnshark"
+  ],
+  "author": "99xtechnology <ashanf@99x.lk> (http://99xtechnology.com)",
+  "license": "ISC"
+}
