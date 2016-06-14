@@ -1,4 +1,8 @@
 # earnshark-sdk-js
+=================================
+
+[![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
+ 
 This is a JavaScript SDK to call https://app.earnshark.com API. Contains methods to call the EarnShark API making the application integration fast. 
 
 ## This Plugin Requires
