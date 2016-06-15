@@ -1,14 +1,33 @@
 {
-  "name": "earnshark-npm",
-  "version": "1.0.28",
-  "description": "This is the earnshark npm",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "earnshark"
+    "name": "earnshark-sdk",
+    "version": "0.0.1",
+    "engines": {
+        "node": ">=4.0"
+    },
+    "description": "Earnshark client SDK for JavaScript",
+    "author": "99xtechnology.com",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/99xt/earnshark-sdk-js"
+    },
+    "keywords": [
+    "earnshark",
+    "license",
+    "saas",
+    "platform",
+    "licensing",
+    "manage",
+    "api",
+    "sdk",
+    "javascript",
+    "paas",
+    "management"
   ],
-  "author": "99xtechnology <ashanf@99x.lk> (http://99xtechnology.com)",
-  "license": "ISC"
+    "main": "index.js",
+    "bin": {},
+    "scripts": {
+        "test": "echo \"Warning: no test specified\" && exit 0"
+    },
+    "dependencies": {}
 }
