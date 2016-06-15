@@ -10,11 +10,11 @@ This is a JavaScript SDK to call https://app.earnshark.com API. Contains methods
 
 ## Installation
 
-`npm install earnshark-sdk-js`
+`npm install earnshark-sdk`
 
 Then you will be able to access the EarnShark API through your code.
 
-After installation require the EarnShark npm through: `var earnsharknpm = require('earnshark-sdk-js');`
+After installation require the EarnShark npm through: `var earnsharknpm = require('earnshark-sdk');`
 
 ## Available Methods
 * getAccountInformation - Retrieve information on a particular account/subscription
