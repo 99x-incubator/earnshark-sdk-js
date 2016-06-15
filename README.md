@@ -1,9 +1,9 @@
 # earnshark-sdk-js
 
 [![Join the chat at https://gitter.im/99xt/earnshark-sdk-js](https://badges.gitter.im/99xt/earnshark-sdk-js.svg)](https://gitter.im/99xt/earnshark-sdk-js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
- 
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]
+
 This is a JavaScript SDK to call https://app.earnshark.com API. Contains methods to call the EarnShark API making the application integration fast. 
 
 ## This Plugin Requires
