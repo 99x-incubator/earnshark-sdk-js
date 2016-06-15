@@ -1,6 +1,10 @@
 {
     "name": "earnshark-sdk",
+<<<<<<< HEAD
     "version": "0.0.1",
+=======
+    "version": "0.0.2",
+>>>>>>> d2226750dcb7435a4fcc1e91c0c40cb7519007ed
     "engines": {
         "node": ">=4.0"
     },
