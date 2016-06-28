@@ -1,10 +1,6 @@
 {
     "name": "earnshark-sdk",
-<<<<<<< HEAD
-    "version": "0.0.1",
-=======
-    "version": "0.0.2",
->>>>>>> d2226750dcb7435a4fcc1e91c0c40cb7519007ed
+    "version": "0.0.3",
     "engines": {
         "node": ">=4.0"
     },
@@ -33,5 +29,7 @@
     "scripts": {
         "test": "echo \"Warning: no test specified\" && exit 0"
     },
-    "dependencies": {}
+    "dependencies": {
+        "request": "^2.72.0"
+    }
 }
