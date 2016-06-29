@@ -1,17 +1,17 @@
 {
-    "name": "earnshark-sdk",
-    "version": "0.0.3",
-    "engines": {
-        "node": ">=4.0"
-    },
-    "description": "Earnshark client SDK for JavaScript",
-    "author": "99xtechnology.com",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/99xt/earnshark-sdk-js"
-    },
-    "keywords": [
+  "name": "earnshark-sdk",
+  "version": "0.0.5",
+  "engines": {
+    "node": ">=4.0"
+  },
+  "description": "Earnshark client SDK for JavaScript",
+  "author": "99xtechnology.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/99xt/earnshark-sdk-js"
+  },
+  "keywords": [
     "earnshark",
     "license",
     "saas",
@@ -24,12 +24,14 @@
     "paas",
     "management"
   ],
-    "main": "index.js",
-    "bin": {},
-    "scripts": {
-        "test": "echo \"Warning: no test specified\" && exit 0"
-    },
-    "dependencies": {
-        "request": "^2.72.0"
-    }
+  "main": "index.js",
+  "bin": {},
+  "scripts": {
+    "test": "echo \"Warning: no test specified\" && exit 0"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "moment": "^2.13.0",
+    "request": "^2.72.0"
+  }
 }

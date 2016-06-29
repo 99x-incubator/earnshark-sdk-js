@@ -1,6 +1,7 @@
 var http = require('http'),
     https = require('https'),
-    request = require('request');
+    request = require('request'),
+    BbPromise = require('bluebird');
 
 exports.addNewSubscription = function (product_id, key, body) {
     var url = 'https://app.earnshark.com/prod/product/' + product_id + '/addsubscriptionfromapi?key=' + key;
@@ -15,6 +16,16 @@ exports.addNewSubscription = function (product_id, key, body) {
             headers: headers,
             json: body
         };
+
+    return new BbPromise(function (resolve) {
+        request(options, function (error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Subscription Added : " + response);
+            }
+        });
+    });
 
     request(options, function (error, response, body) {
         console.log(response);
