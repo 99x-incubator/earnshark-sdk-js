@@ -5,6 +5,10 @@ var http = require('http'),
 
 var debug = false;
 
+var baseURL = 'https://app.earnshark.com/prod/product/';
+
+var appDir = 'http://earnsharkbeta.com.s3-website-eu-west-1.amazonaws.com/';
+
 exports.isTest = function(newdebug) {
     debug = newdebug;
 };
@@ -17,7 +21,7 @@ exports.addNewSubscription = function(product_id, key, body) {
         });
     } else {
 
-        var url = 'https://app.earnshark.com/prod/product/' + product_id + '/addsubscriptionfromapi?key=' + key;
+        var url = baseURL + product_id + '/addsubscriptionfromapi?key=' + key;
 
         var headers = {
                 'User-Agent': 'Super Agent/0.0.1',
@@ -33,7 +37,6 @@ exports.addNewSubscription = function(product_id, key, body) {
         return new BbPromise(function(resolve, reject) {
             request(options, function(error, response, body) {
                 if (error) {
-                    //console.log(error);
                     reject(error)
                 } else {
                     resolve(response.body)
@@ -55,7 +58,7 @@ exports.getAccountInformation = function(product_id, key, account_id) {
         });
     } else {
 
-        var url = 'https://app.earnshark.com/prod/product/' + product_id + '/subscriptioninfo/' + account_id + '?key=' + key;
+        var url = baseURL + product_id + '/subscriptioninfo/' + account_id + '?key=' + key;
 
         var headers = {
                 'User-Agent': 'Super Agent/0.0.1',
@@ -70,11 +73,9 @@ exports.getAccountInformation = function(product_id, key, account_id) {
         return new BbPromise(function(resolve, reject) {
             request(options, function(error, response, body) {
                 if (error) {
-                    //  console.log(error);
                     reject(error)
                 } else {
                     resolve(response.body)
-                        //  console.log(response.body);
                 }
             });
         });
@@ -90,7 +91,7 @@ exports.getLicenseInformation = function(product_id, key, license_id) {
         });
     } else {
 
-        var url = 'https://app.earnshark.com/prod/product/' + product_id + '/license/' + license_id + '/getlicensefromapi?key=' + key;
+        var url = baseURL + product_id + '/license/' + license_id + '/getlicensefromapi?key=' + key;
         var headers = {
                 'User-Agent': 'Super Agent/0.0.1',
                 'Content-Type': 'application/json'
@@ -104,11 +105,9 @@ exports.getLicenseInformation = function(product_id, key, license_id) {
         return new BbPromise(function(resolve, reject) {
             request(options, function(error, response, body) {
                 if (error) {
-                    // console.log(error);
                     reject(error)
                 } else {
                     resolve(response.body)
-                        //console.log(url);
                 }
             });
         });
@@ -116,7 +115,6 @@ exports.getLicenseInformation = function(product_id, key, license_id) {
 };
 
 // Generate the payment url for license payments
-exports.getPaymentURL  = function(product_id,key,account_id,redirect){
-    return 'http://earnsharkbeta.com.s3-website-eu-west-1.amazonaws.com/payment.html?redirect='+redirect+'&productID='+product_id+'&accountID='+account_id+'&key='+key;
+exports.getPaymentURL = function(product_id, key, account_id, redirect) {
+    return appDir + 'payment.html?redirect=' + redirect + '&productID=' + product_id + '&accountID=' + account_id + '&key=' + key;
 };
-
