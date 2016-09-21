@@ -87,7 +87,7 @@ exports.getAccountInformation = function(product_id, key, account_id) {
 exports.renewSubscription = function(product_id, key, subscription_id,new_license_id) {
     if (debug) {
         return new BbPromise(function(resolve, reject) {
-            resolve('{ "TableName":"Subscription", "Item":{ "Date":"01/01/2016", "Cost":{ "value":"100", "currency":"USD" }, "Name":"5 Users Plan", "Product_ID":1, "Customer_ID":1, "Customer_Name":"Customer Name", "Account_ID":"123456", "Metadata":"{\"users\":\"10 users\"}", "Subscription_ID":1, "Tags":[ "10users" ], "License_ID":1, "Invalid":false, "Expired":false, "Billing_Cycle":{ "value":1, "type":"Monthly" }, "Description":"10 Users per month / 100", "Tenant_ID":"eu-west-1:00000000-0000-0000-0000-000000000000" } }')
+            resolve('{ "Date":"01/01/2016", "Cost":{ "value":"100", "currency":"USD" }, "Name":"5 Users Plan", "Product_ID":1, "Customer_ID":1, "Customer_Name":"Customer Name", "Account_ID":"123456", "Metadata":"{\"users\":\"10 users\"}", "Subscription_ID":1, "Tags":[ "10users" ], "License_ID":1, "Invalid":false, "Expired":false, "Billing_Cycle":{ "value":1, "type":"Monthly" }, "Description":"10 Users per month / 100", "Tenant_ID":"eu-west-1:00000000-0000-0000-0000-000000000000" }')
         });
     } else {
 
@@ -126,6 +126,37 @@ exports.getLicenseInformation = function(product_id, key, license_id) {
     } else {
 
         var url = baseURL + product_id + '/license/' + license_id + '/getlicensefromapi?key=' + key;
+        var headers = {
+                'User-Agent': 'Super Agent/0.0.1',
+                'Content-Type': 'application/json'
+            },
+            options = {
+                url: url,
+                method: 'GET',
+                headers: headers
+            };
+
+        return new BbPromise(function(resolve, reject) {
+            request(options, function(error, response, body) {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve(response.body)
+                }
+            });
+        });
+    }
+};
+
+// Get All the Licenses for a Product
+exports.getAllLicensesOfProduct = function(product_id, key) {
+    if (debug) {
+        return new BbPromise(function(resolve, reject) {
+            resolve('[{"Name":"License Name","Cost":{"value":"10","currency":"USD"},"Tags":["free","test","trial"],"License_ID":1,"Product_ID":1,"Description":"Test","Billing_Cycle":{"value":1,"type":"Monthly"},"Metadata":"{}"}]')
+        });
+    } else {
+
+        var url = baseURL + product_id + '/license/all?key=' + key;
         var headers = {
                 'User-Agent': 'Super Agent/0.0.1',
                 'Content-Type': 'application/json'
