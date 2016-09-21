@@ -21,6 +21,7 @@ After installation require the EarnShark npm through: `var earnsharknpm = requir
 ## Available Methods
 * getAccountInformation - Retrieve information on a particular account/subscription
 * getLicenseInformation - Retrieve information on a particular license
+* getAllLicensesOfProduct - Retrieve all the license data for a particular product
 * addNewSubscription - Add a new subscription to a product
 * getPaymentURL - Returns the payment portal URL for a subscription(linked to PayPal)
 
@@ -59,6 +60,15 @@ var license_token = 'YOUR LICENSE TOKEN'
 earnsharknpm.getLicenseInformation(product_id, license_token, license_id).then(function(data) {
     console.log(data)
 
+}, function(err) {
+    console.log(err)
+});
+```
+###To get all the product licenses###
+```
+earnsharknpm.getAllLicensesOfProduct(product_id, key).then(function(data) {
+    console.log(data)
+    
 }, function(err) {
     console.log(err)
 });
