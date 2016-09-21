@@ -51,12 +51,13 @@ earnsharknpm.getAccountInformation(product_id,key,account_id).then(function(data
     console.log(err)
 });
 
-var license_id = 'ID'; // integer
-
-var license_token = 'YOUR LICENSE TOKEN'
 ```
 ###To get the information related to a license###
 ```
+var license_id = 'ID'; // integer
+
+var license_token = 'YOUR LICENSE TOKEN'
+
 earnsharknpm.getLicenseInformation(product_id, license_token, license_id).then(function(data) {
     console.log(data)
 
