@@ -179,6 +179,38 @@ exports.getAllLicensesOfProduct = function(product_id, key) {
     }
 };
 
+
+// Retrieve All Payment Transactions for an Account
+exports.getAccountPayments = function(product_id, account_id ,key) {
+    if (debug) {
+        return new BbPromise(function(resolve, reject) {
+            resolve('[ { "Amount":"100", "Created_At":"1474872974062", "Currency":"USD", "Product_ID":1, "PayPal_Transaction":"PAY-11111111111", "Updated_At":"1474872974062", "Account_ID":"local", "PayPal_Payer_ID":"111111", "Subscription_ID":1, "Payment_Processed":true, "Payout_ID":"12345", "Payment_Sent":true, "PayPal_Payment_ID":"PAY-11111111111" } ]')
+        });
+    } else {
+
+        var url = baseURL + product_id + '/account/'+account_id+'/transactions?key=' + key;
+        var headers = {
+                'User-Agent': 'Super Agent/0.0.1',
+                'Content-Type': 'application/json'
+            },
+            options = {
+                url: url,
+                method: 'GET',
+                headers: headers
+            };
+
+        return new BbPromise(function(resolve, reject) {
+            request(options, function(error, response, body) {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve(response.body)
+                }
+            });
+        });
+    }
+};
+
 // Generate the payment url for license payments
 exports.getPaymentURL = function(product_id, key, account_id, redirect) {
     return appDir + 'payment.html?redirect=' + redirect + '&productID=' + product_id + '&accountID=' + account_id + '&key=' + key;
