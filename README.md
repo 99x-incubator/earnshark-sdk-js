@@ -24,6 +24,7 @@ After installation require the EarnShark npm through: `var earnsharknpm = requir
 * getAllLicensesOfProduct - Retrieve all the license data for a particular product
 * addNewSubscription - Add a new subscription to a product
 * getPaymentURL - Returns the payment portal URL for a subscription(linked to PayPal)
+* getAccountPayments - Returns all the payment transactions associated with the account
 
 
 ##Usage Sample
@@ -34,17 +35,17 @@ To Switch between Debug and Live modes use the following function,
 
 Initialize the ID's needed
 
-```
+```javascript
 var earnsharknpm = require('earnshark-sdk');
 
 var key = 'YOUR KEY FROM EarnShark Dashboard';
 
 var account_id = 'ACCOUNT_ID';
 
-var product_id = 'PRODUCT_ID;` // integer
+var product_id = 'PRODUCT_ID'; // integer
 ```
 ###To retrieve the account information###
-```
+```javascript
 earnsharknpm.getAccountInformation(product_id,key,account_id).then(function(data){
     console.log(data)
 },function(err){
@@ -53,7 +54,7 @@ earnsharknpm.getAccountInformation(product_id,key,account_id).then(function(data
 
 ```
 ###To get the information related to a license###
-```
+```javascript
 var license_id = 'ID'; // integer
 
 var license_token = 'YOUR LICENSE TOKEN'
@@ -66,7 +67,7 @@ earnsharknpm.getLicenseInformation(product_id, license_token, license_id).then(f
 });
 ```
 ###To get all the product licenses###
-```
+```javascript
 earnsharknpm.getAllLicensesOfProduct(product_id, key).then(function(data) {
     console.log(data)
     
@@ -75,7 +76,7 @@ earnsharknpm.getAllLicensesOfProduct(product_id, key).then(function(data) {
 });
 ```
 ###To create a new user account###
-```
+```javascript
 var body = {
             "account":{
                     "name":"Account Name",
@@ -95,6 +96,18 @@ earnsharknpm.addNewSubscription(product_id, key, body).then(function(data) {
     console.log(err)
 })
 
+```
+###Generate Payment URL for an Account###
+```javascript
+earnsharknpm.getPaymentURL(product_id, key,  data.account_id, data.redirect)
+```
+###To retrieve All Payment Transactions for an Account###
+```javascript
+earnsharknpm.getAccountPayments(product_id, account_id,key).then(function(data) {
+    console.log(data)
+}, function(err) {
+    console.log(err)
+});
 ```
 
 
