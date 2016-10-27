@@ -25,6 +25,7 @@ After installation require the EarnShark npm through: `var earnsharknpm = requir
 * addNewSubscription - Add a new subscription to a product
 * getPaymentURL - Returns the payment portal URL for a subscription(linked to PayPal)
 * getAccountPayments - Returns all the payment transactions associated with the account
+* renewSubscription - Renew/Update a Subscription
 
 
 ##Usage Sample
