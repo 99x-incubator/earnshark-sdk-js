@@ -28,7 +28,7 @@ After installation require the EarnShark npm through: `var earnsharknpm = requir
 * renewSubscription - Renew/Update a Subscription
 
 
-##Usage Sample
+## Usage Sample
 
 To Switch between Debug and Live modes use the following function,
 
@@ -45,7 +45,7 @@ var account_id = 'ACCOUNT_ID';
 
 var product_id = 'PRODUCT_ID'; // integer
 ```
-###To retrieve the account information###
+### To retrieve the account information 
 ```javascript
 earnsharknpm.getAccountInformation(product_id,key,account_id).then(function(data){
     console.log(data)
@@ -54,7 +54,7 @@ earnsharknpm.getAccountInformation(product_id,key,account_id).then(function(data
 });
 
 ```
-###To get the information related to a license###
+### To get the information related to a license 
 ```javascript
 var license_id = 'ID'; // integer
 
@@ -67,7 +67,7 @@ earnsharknpm.getLicenseInformation(product_id, license_token, license_id).then(f
     console.log(err)
 });
 ```
-###To get all the product licenses###
+### To get all the product licenses 
 ```javascript
 earnsharknpm.getAllLicensesOfProduct(product_id, key).then(function(data) {
     console.log(data)
@@ -76,7 +76,7 @@ earnsharknpm.getAllLicensesOfProduct(product_id, key).then(function(data) {
     console.log(err)
 });
 ```
-###To create a new user account###
+### To create a new user account 
 ```javascript
 var body = {
             "account":{
@@ -98,11 +98,11 @@ earnsharknpm.addNewSubscription(product_id, key, body).then(function(data) {
 })
 
 ```
-###Generate Payment URL for an Account###
+### Generate Payment URL for an Account
 ```javascript
 earnsharknpm.getPaymentURL(product_id, key,  data.account_id, data.redirect)
 ```
-###To retrieve All Payment Transactions for an Account###
+### To retrieve All Payment Transactions for an Account
 ```javascript
 earnsharknpm.getAccountPayments(product_id, account_id,key).then(function(data) {
     console.log(data)
