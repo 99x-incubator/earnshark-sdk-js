@@ -215,3 +215,40 @@ exports.getAccountPayments = function(product_id, account_id ,key) {
 exports.getPaymentURL = function(product_id, key, account_id, redirect) {
     return appDir + 'payment.html?redirect=' + redirect + '&productID=' + product_id + '&accountID=' + account_id + '&key=' + key;
 };
+
+//Get license transaction secure token
+exports.getPaymentToken = function(body) {
+    if (debug) {
+        return new BbPromise(function(resolve, reject) {
+            resolve('{ "status":"success", "message":"Subscription created without notifications and without invoice" }')
+        });
+    } else {
+
+        var url = 'https://app.earnshark.com/prod/payments/getTransactionID';
+        var headers = {
+                'User-Agent': 'Super Agent/0.0.1',
+                'Content-Type': 'application/json'
+            },
+            options = {
+                url: url,
+                method: 'POST',
+                headers: headers,
+                json: body
+            };
+
+        return new BbPromise(function(resolve, reject) {
+            request(options, function(error, response, body) {
+                if (error) {
+                    reject(error)
+                } else { 
+                    resolve(response.body);
+                }
+            });
+        });
+    }
+};
+
+// Generate the payment url for license payments securely
+exports.getTransactionURL = function(key) {
+    return appDir + 'payment2.html?transactionID=' + key;
+};
