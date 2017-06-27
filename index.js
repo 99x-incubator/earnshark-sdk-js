@@ -7,7 +7,9 @@ var debug = false;
 
 var baseURL = 'https://app.earnshark.com/prod/product/';
 
-var appDir = 'http://earnsharkbeta.com.s3-website-eu-west-1.amazonaws.com/';
+// var appDir = 'http://earnsharkbeta.com.s3-website-eu-west-1.amazonaws.com/';
+var appDir = 'http://app.earnshark.com/';
+
 
 exports.isTest = function(newdebug) {
     debug = newdebug;
