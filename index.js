@@ -2,9 +2,7 @@ const http = require("http");
 const https = require("https");
 const request = require("request");
 const BbPromise = require("bluebird");
-
 const baseURL = "https://app.earnshark.com/prod/product/";
-const appDir = "http://earnsharkbeta.com.s3-website-eu-west-1.amazonaws.com/";
 
 let debug = false;
 
@@ -20,7 +18,6 @@ exports.addNewSubscription = function(product_id, key, body) {
     });
   } else {
     let url = baseURL + product_id + "/addsubscriptionfromapi?key=" + key;
-
     let headers = {
       "User-Agent": "Super Agent/0.0.1",
       "Content-Type": "application/json"
@@ -35,9 +32,9 @@ exports.addNewSubscription = function(product_id, key, body) {
     return new BbPromise(function(resolve, reject) {
       request(options, function(error, response, body) {
         if (error) {
-            reject(error)
+          reject(error)
         } else {
-            resolve(response.body)
+          resolve(response.body)
         }
       });
     });
@@ -49,12 +46,43 @@ exports.addNewSubscription = function(product_id, key, body) {
 
 // Get User account Information 
 exports.getAccountInformation = function(product_id, key, account_id) {
+    if (debug) {
+      return new BbPromise(function(resolve, reject) {
+        resolve('[ { "Date":"01/01/2016", "Cost":{ "value":"100", "currency":"USD" }, "Name":"5 Users Plan", "Product_ID":1, "Customer_ID":1, "Customer_Name":"Customer Name", "Account_ID":"123456", "Metadata":"{\"users\":\"10 users\"}", "Subscription_ID":1, "Tags":[ "10users" ], "License_ID":1, "Invalid":false, "Expired":false, "Billing_Cycle":{ "value":1, "type":"Monthly" }, "Description":"10 Users per month / 100", "Tenant_ID":"eu-west-1:00000000-0000-0000-0000-000000000000" } ]')
+      });
+    } else {
+      let url = baseURL + product_id + "/subscriptioninfo/" + account_id + "?key=" + key;
+      let headers = {
+        "User-Agent": "Super Agent/0.0.1",
+        "Content-Type": "application/json"
+      },
+      options = {
+        url: url,
+        method: "GET",
+        headers: headers
+      };
+
+      return new BbPromise(function(resolve, reject) {
+        request(options, function(error, response, body) {
+          if (error) {
+            reject(error)
+          } else {
+            resolve(response.body)
+          }
+        });
+      });
+
+    }
+};
+
+// Renew/Update a Subscription
+exports.renewSubscription = function(product_id, key, subscription_id,new_license_id) {
   if (debug) {
     return new BbPromise(function(resolve, reject) {
-      resolve('[ { "Date":"01/01/2016", "Cost":{ "value":"100", "currency":"USD" }, "Name":"5 Users Plan", "Product_ID":1, "Customer_ID":1, "Customer_Name":"Customer Name", "Account_ID":"123456", "Metadata":"{\"users\":\"10 users\"}", "Subscription_ID":1, "Tags":[ "10users" ], "License_ID":1, "Invalid":false, "Expired":false, "Billing_Cycle":{ "value":1, "type":"Monthly" }, "Description":"10 Users per month / 100", "Tenant_ID":"eu-west-1:00000000-0000-0000-0000-000000000000" } ]')
+      resolve('{ "Date":"01/01/2016", "Cost":{ "value":"100", "currency":"USD" }, "Name":"5 Users Plan", "Product_ID":1, "Customer_ID":1, "Customer_Name":"Customer Name", "Account_ID":"123456", "Metadata":"{\"users\":\"10 users\"}", "Subscription_ID":1, "Tags":[ "10users" ], "License_ID":1, "Invalid":false, "Expired":false, "Billing_Cycle":{ "value":1, "type":"Monthly" }, "Description":"10 Users per month / 100", "Tenant_ID":"eu-west-1:00000000-0000-0000-0000-000000000000" }')
     });
   } else {
-    let url = baseURL + product_id + "/subscriptioninfo/" + account_id + "?key=" + key;
+    let url = baseURL + product_id + "/subscription/" + subscription_id +"/apiRenewSubscription/"+ new_license_id +"?key=" + key;
     let headers = {
       "User-Agent": "Super Agent/0.0.1",
       "Content-Type": "application/json"
@@ -71,37 +99,6 @@ exports.getAccountInformation = function(product_id, key, account_id) {
           reject(error)
         } else {
           resolve(response.body)
-        }
-      });
-    });
-
-  }
-};
-
-// Renew/Update a Subscription
-exports.renewSubscription = function(product_id, key, subscription_id, new_license_id) {
-  if (debug) {
-    return new BbPromise(function(resolve, reject) {
-      resolve('{ "Date":"01/01/2016", "Cost":{ "value":"100", "currency":"USD" }, "Name":"5 Users Plan", "Product_ID":1, "Customer_ID":1, "Customer_Name":"Customer Name", "Account_ID":"123456", "Metadata":"{\"users\":\"10 users\"}", "Subscription_ID":1, "Tags":[ "10users" ], "License_ID":1, "Invalid":false, "Expired":false, "Billing_Cycle":{ "value":1, "type":"Monthly" }, "Description":"10 Users per month / 100", "Tenant_ID":"eu-west-1:00000000-0000-0000-0000-000000000000" }')
-    });
-  } else {
-    let url = baseURL + product_id + "/subscription/" + subscription_id + "/apiRenewSubscription/" + new_license_id + "?key=" + key;
-    let headers = {
-      "User-Agent": "Super Agent/0.0.1",
-      "Content-Type": "application/json"
-    },
-    options = {
-      url: url,
-      method: "GET",
-      headers: headers
-    };
-
-    return new BbPromise(function(resolve, reject) {
-      request(options, function(error, response, body) {
-        if (error) {
-            reject(error)
-        } else {
-            resolve(response.body)
         }
       });
     });
@@ -149,8 +146,8 @@ exports.getAllLicensesOfProduct = function(product_id, key) {
   } else {
     let url = baseURL + product_id + "/license/all?key=" + key;
     let headers = {
-        "User-Agent": "Super Agent/0.0.1",
-        "Content-Type": "application/json"
+      "User-Agent": "Super Agent/0.0.1",
+      "Content-Type": "application/json"
     },
     options = {
       url: url,
@@ -172,13 +169,13 @@ exports.getAllLicensesOfProduct = function(product_id, key) {
 
 
 // Retrieve All Payment Transactions for an Account
-exports.getAccountPayments = function(product_id, account_id, key) {
+exports.getAccountPayments = function(product_id, account_id ,key) {
   if (debug) {
     return new BbPromise(function(resolve, reject) {
       resolve('[ { "Amount":"100", "Created_At":"1474872974062", "Currency":"USD", "Product_ID":1, "PayPal_Transaction":"PAY-11111111111", "Updated_At":"1474872974062", "Account_ID":"local", "PayPal_Payer_ID":"111111", "Subscription_ID":1, "Payment_Processed":true, "Payout_ID":"12345", "Payment_Sent":true, "PayPal_Payment_ID":"PAY-11111111111" } ]')
     });
   } else {
-    let url = baseURL + product_id + "/account/" + account_id + "/transactions?key=" + key;
+    let url = baseURL + product_id + "/account/"+account_id+"/transactions?key=" + key;
     let headers = {
       "User-Agent": "Super Agent/0.0.1",
       "Content-Type": "application/json"
@@ -201,7 +198,40 @@ exports.getAccountPayments = function(product_id, account_id, key) {
   }
 };
 
-// Generate the payment url for license payments
+//Get license transaction secure token
 exports.getPaymentURL = function(product_id, key, account_id, redirect) {
-  return appDir + "payment.html?redirect=" + redirect + "&productID=" + product_id + "&accountID=" + account_id + "&key=" + key;
+  if (debug) {
+    return new BbPromise(function(resolve, reject) {
+      resolve('{ "status":"success", "message":"Subscription created without notifications and without invoice" }')
+    });
+  } else {
+    let body = {
+      "redirect" : redirect,
+      "account_id": account_id,
+      "product_id": product_id,
+      "key": key
+    }
+
+    let url = "https://app.earnshark.com/prod/payments/getTransactionID";
+    let headers = {
+      "User-Agent": "Super Agent/0.0.1",
+      "Content-Type": "application/json"
+    },
+    options = {
+      url: url,
+      method: "POST",
+      headers: headers,
+      json: body
+    };
+
+    return new BbPromise(function(resolve, reject) {
+      request(options, function(error, response, body) {
+        if (error) {
+          reject(error)
+        } else { 
+          resolve(response.body);
+        }
+      });
+    });
+  }
 };
