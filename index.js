@@ -7,7 +7,9 @@ var debug = false;
 
 var baseURL = 'https://app.earnshark.com/prod/product/';
 
-var appDir = 'http://earnsharkbeta.com.s3-website-eu-west-1.amazonaws.com/';
+// var appDir = 'http://earnsharkbeta.com.s3-website-eu-west-1.amazonaws.com/';
+//var appDir = 'http://app.earnshark.com/';
+
 
 exports.isTest = function(newdebug) {
     debug = newdebug;
@@ -211,7 +213,40 @@ exports.getAccountPayments = function(product_id, account_id ,key) {
     }
 };
 
-// Generate the payment url for license payments
+//Get license transaction secure token
 exports.getPaymentURL = function(product_id, key, account_id, redirect) {
-    return appDir + 'payment.html?redirect=' + redirect + '&productID=' + product_id + '&accountID=' + account_id + '&key=' + key;
+    if (debug) {
+        return new BbPromise(function(resolve, reject) {
+            resolve('{ "status":"success", "message":"Subscription created without notifications and without invoice" }')
+        });
+    } else {
+        var body = {
+                "redirect" : redirect,
+                "account_id": account_id,
+                "product_id": product_id,
+                "key": key
+            }
+
+        var url = 'https://app.earnshark.com/prod/payments/getTransactionID';
+        var headers = {
+                'User-Agent': 'Super Agent/0.0.1',
+                'Content-Type': 'application/json'
+            },
+            options = {
+                url: url,
+                method: 'POST',
+                headers: headers,
+                json: body
+            };
+
+        return new BbPromise(function(resolve, reject) {
+            request(options, function(error, response, body) {
+                if (error) {
+                    reject(error)
+                } else { 
+                    resolve(response.body);
+                }
+            });
+        });
+    }
 };
