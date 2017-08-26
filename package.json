@@ -27,7 +27,7 @@
   "main": "index.js",
   "bin": {},
   "scripts": {
-    "test": "echo \"Warning: no test specified\" && exit 0"
+    "test": "./node_modules/.bin/mocha --reporter spec"
   },
   "dependencies": {
     "bluebird": "^3.4.1",
