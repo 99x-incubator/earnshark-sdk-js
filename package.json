@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "bluebird": "^3.4.1",
+    "codacy": "^1.0.1-1",
     "express": "^4.15.4",
     "moment": "^2.13.0",
     "request": "^2.81.0"
