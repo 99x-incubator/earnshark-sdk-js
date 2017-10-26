@@ -110,6 +110,15 @@ earnsharknpm.getAccountPayments(product_id, account_id,key).then(function(data) 
     console.log(err)
 });
 ```
+### To renew current license subscription
+```javascript
+earnsharknpm.renewSubscription(product_id, key, subscription_id, new_license_id).then(function(data) {
+    console.log(data);
+}, function(err) {
+    console.log(err)
+});
+```
+
 
 
 
